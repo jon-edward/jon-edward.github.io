@@ -1,11 +1,43 @@
 :root {
   background-color: white;
   color: #333333;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-size: medium;
+}
+
+.dark-variant {
+  display: none;
+}
+
+code {
+  font-size: large;
+}
+
+.logo {
+  vertical-align: center;
+  margin: 15px;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     background-color: #333333;
     color: white;
+  }
+
+  .light-variant {
+    display: none;
+  }
+
+  .dark-variant {
+    display: inline-block;
+  }
+
+  a {
+    color: #7568ff;
+  }
+
+  a:visited {
+    color: #f98fff;
   }
 }
