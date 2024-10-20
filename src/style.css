@@ -1,4 +1,7 @@
 :root {
+  --secondary-color: rgb(3, 75, 182);
+  --tertiary-color: rgb(176, 3, 182);
+
   background-color: white;
   color: #333333;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
@@ -16,15 +19,65 @@ code {
 
 .logo {
   vertical-align: center;
-  margin: 15px 5px;
+  margin: -3px 5px;
 }
 
 li {
   margin: 5px 0;
 }
 
+h1,
+h2,
+h3 {
+  background: linear-gradient(
+    to right,
+    var(--secondary-color),
+    var(--tertiary-color),
+    var(--secondary-color)
+  );
+  animation: pretty 2s linear infinite;
+  background-size: 200%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  transition: color 0.1s;
+}
+
+h1:hover,
+h2:hover,
+h3:hover {
+  color: rgba(0, 0, 0, 0);
+}
+
+a {
+  color: var(--secondary-color);
+}
+
+a:visited {
+  color: var(--tertiary-color);
+}
+
+svg {
+  color: var(--secondary-color);
+}
+
+ul {
+  list-style: none;
+}
+
+@keyframes pretty {
+  0% {
+    background-position: 100%;
+  }
+  100% {
+    background-position: -100%;
+  }
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
+    --secondary-color: rgb(121, 250, 147);
+    --tertiary-color: rgb(224, 250, 121);
+
     background-color: #333333;
     color: white;
   }
@@ -36,12 +89,12 @@ li {
   .dark-variant {
     display: inline-block;
   }
+}
 
-  a {
-    color: #7568ff;
-  }
-
-  a:visited {
-    color: #f98fff;
+@media (pointer: none), (pointer: coarse) {
+  h1,
+  h2,
+  h3 {
+    color: rgba(0, 0, 0, 0);
   }
 }
