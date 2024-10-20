@@ -12,6 +12,14 @@ function openProjectDetails() {
   }
 }
 
+function closeProjectDetails() {
+  const detailsElements = projectsSection.querySelectorAll("details");
+
+  for (const element of detailsElements) {
+    element.removeAttribute("open");
+  }
+}
+
 function handleHash(hash: string) {
   switch (hash) {
     case "#projects":
@@ -22,6 +30,7 @@ function handleHash(hash: string) {
       });
       break;
     case "#about-me":
+      closeProjectDetails();
       window.scrollTo({
         top: aboutMeSection.offsetTop,
         behavior: "smooth",
