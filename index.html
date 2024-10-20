@@ -6,23 +6,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Jon is a developer</title>
   </head>
-  <body>
+  <body style="max-width: 1000px">
     <h1 class="hover-grad-txt">Jon is a developer</h1>
     <p>This site is intentionally not blank.</p>
     <section id="about-me">
-      <h2>About me <a href="#about-me"
-        ><img
-          id="link-icon-dark"
-          class="logo dark-variant"
-          height="25"
-          width="25"
-          src="/src/assets/link-dark.svg" /><img
-          id="link-icon-light"
-          class="logo light-variant"
-          height="25"
-          width="25"
-          src="/src/assets/link.svg"
-      /></a></h2>
+      <h2>
+        About me
+        <a href="#about-me"
+          ><img
+            id="link-icon-dark"
+            class="logo dark-variant"
+            height="25"
+            width="25"
+            src="/src/assets/link-dark.svg" /><img
+            id="link-icon-light"
+            class="logo light-variant"
+            height="25"
+            width="25"
+            src="/src/assets/link.svg"
+        /></a>
+      </h2>
       <p>
         I am a Python, TS/JS, Nim, and SQL developer currently located in
         Western New York.
@@ -43,37 +46,124 @@
             height="25"
             width="25"
             src="/src/assets/link.svg"
-        />
+        /></a>
       </h2>
-      <ul>
-        <li>
-          <a href="https://github.com/jon-edward/box2d.nim"
-            ><code>box2d.nim</code></a
+      <details>
+        <summary>
+          <strong
+            ><a href="https://github.com/jon-edward/box2d.nim"
+              ><code>box2d.nim</code></a
+            >
+            - Nim bindings for Box2D, a popular game physics engine.</strong
           >
-          - Nim bindings for Box2D, a popular game physics engine.
-        </li>
-        <li>
-          <a href="https://github.com/jon-edward/wiki_dump"
-            ><code>wiki data dump</code></a
+        </summary>
+        <p>
+          Nim is a statically typed compiled systems language with C
+          interoperability. In the sphere of game development in Nim, developers
+          often have to roll their own physics engine if their game requires
+          physics. This presents a great opportunity to learn but can be a
+          daunting task if the developer isn't already familiar with the
+          underlying math.
+        </p>
+        <p>
+          This binding solved a personal need to create a physics-based game in
+          Nim and by creating complete
+          <a href="https://jon.is-a.dev/box2d.nim/">documentation</a> and
+          <a href="https://github.com/jon-edward/box2d.nim/tree/main/tests"
+            >testing</a
           >
-          - API for traversing and downloading from Wikipedia Data Dumps.
-        </li>
-        <li>
-          <a href="https://github.com/jon-edward/web_python"
-            ><code>web python</code></a
+          I was able to effectively solve this problem for others.
+        </p>
+      </details>
+      <details>
+        <summary>
+          <strong
+            ><a href="https://github.com/jon-edward/wiki_dump"
+              ><code>wiki data dump</code></a
+            >
+            - API for traversing and downloading from Wikimedia Data
+            Dumps.</strong
           >
-          - Online interpreter for Python with optional static type checking.
-        </li>
-        <li>
-          <a href="https://github.com/jon-edward/wiki-categories"
-            ><code>wiki categories</code></a
+        </summary>
+        <p>
+          Wikimedia uploads routine data dumps from their projects (Wikipedia,
+          Wikibooks, Wiktionary, etc.), and these are accessible by their
+          <a href="https://dumps.wikimedia.org/">data downloads</a> site. To
+          query for assets on this site, people often resort to webscraping
+          which provides a short term solution but can be taxing for Wikimedia's
+          servers and is prone to failure.
+        </p>
+        <p>
+          To solve this issue, I created an API that accesses the index of the
+          site and wraps common query operations around idiomatic Python
+          classes.
+        </p>
+      </details>
+      <details>
+        <summary>
+          <strong
+            ><a href="https://github.com/jon-edward/web_python"
+              ><code>web python</code></a
+            >
+            - Online interpreter for Python with optional static type
+            checking.</strong
           >
-          - Constructs a compact Wikipedia category heirarchy.
-        </li>
-      </ul>
+        </summary>
+        <p>
+          Online Python interpreters usually don't have operability with the
+          user's actual file system, and you have to upload individual scripts
+          and files to use them within the interpreter, which can be tedious. In
+          addition to this, the code is often run within a cloud service (such
+          as
+          <a href="https://colab.research.google.com/">Google Colab</a>) which
+          may not always be desired.
+        </p>
+        <p>
+          Pyodide is a WASM-based Python interpreter and when provided a native
+          file system directory handle as a virtual file system mount point you
+          can use the interpreter very much like a native Python installation:
+          file reads/writes are updated in real time.
+        </p>
+        <p>
+          This is a huge quality improvement over typical online Python
+          interpreters, and with the addition of mypy static type checking
+          (again, entirely in the browser) this nears even closer to a native
+          Python installation.
+        </p>
+      </details>
+
+      <details>
+        <summary>
+          <strong
+            ><a href="https://github.com/jon-edward/wiki-categories"
+              ><code>wiki categories</code></a
+            >
+            - Constructs a compact Wikipedia category hierarchy.</strong
+          >
+        </summary>
+        <p>
+          For another project, I needed a way to navigate the Wikipedia category
+          hierarchy quickly, and without the Wikipedia API. Originally using the
+          above <code>wiki_dump</code> project, I constructed a pipeline to
+          automatically extract category data from the Wikimedia assets,
+          transform it into a graph structure, and upload it to GitHub Pages.
+        </p>
+        <p>
+          There were multiple limitations that needed to be properly handled:
+          the GH runners have a fairly low space limitation, and a GH Pages
+          artifact can only be so large. This necessitated using streaming to
+          process the data as it was being given to the runner without
+          collecting much memory over the course of the run, and creating a
+          <a
+            href="https://github.com/jon-edward/wiki-categories?tab=readme-ov-file#format"
+            >compact data format</a
+          >
+          that can be easily parsed.
+        </p>
+      </details>
     </section>
     <section id="links">
-      <p>Contact me for my resume.<code> :)</code></p>
+      <p>Contact me for my resume. <code>:)</code></p>
       <p>
         <a href="https://github.com/jon-edward" target="_blank"
           ><img

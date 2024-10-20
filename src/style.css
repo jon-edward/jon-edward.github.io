@@ -14,7 +14,7 @@
 }
 
 code {
-  font-size: large;
+  font-size: larger;
 }
 
 .logo {
@@ -24,6 +24,13 @@ code {
 
 li {
   margin: 5px 0;
+}
+
+details {
+  padding: 10px;
+  background-color: rgb(241, 241, 241);
+  margin: 3px;
+  border-radius: 10px;
 }
 
 h1,
@@ -88,6 +95,9 @@ ul {
 
   .dark-variant {
     display: inline-block;
+  }
+  details {
+    background-color: rgb(68, 68, 68);
   }
 }
 
