@@ -60,6 +60,10 @@ details {
   border-radius: 10px;
 }
 
+details + details {
+  margin-top: 10px;
+}
+
 pre > code {
   border-radius: 10px;
 }
