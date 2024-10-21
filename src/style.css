@@ -9,6 +9,31 @@
   font-size: medium;
 }
 
+html {
+  display: table;
+  margin: auto;
+}
+
+body {
+  display: table-cell;
+  vertical-align: middle;
+  max-width: 1000px;
+}
+
+.projects-img {
+  max-width: 1000px;
+  width: 100%;
+  border-radius: 10px;
+  margin: 0;
+  padding: 0;
+  display: block;
+}
+
+details > img {
+  border-radius: 0;
+  max-width: calc(1000px - 20px);
+}
+
 .dark-variant {
   display: none;
 }
@@ -27,9 +52,13 @@ li {
 }
 
 details {
-  padding: 10px;
+  padding: 5px;
   background-color: rgb(241, 241, 241);
-  margin: 3px;
+  margin: 3px 0;
+  border-radius: 10px;
+}
+
+pre > code {
   border-radius: 10px;
 }
 
@@ -78,6 +107,10 @@ ul {
   100% {
     background-position: -100%;
   }
+}
+
+summary a * {
+  pointer-events: none;
 }
 
 @media (prefers-color-scheme: dark) {

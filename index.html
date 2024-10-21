@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Jon is a developer</title>
   </head>
-  <body style="max-width: 1000px">
+  <body>
     <h1 class="hover-grad-txt">Jon is a developer</h1>
     <p>This site is intentionally not blank.</p>
     <section id="about-me">
@@ -53,7 +53,7 @@
             src="/src/assets/link.svg"
         /></a>
       </h2>
-      <details>
+      <details open="">
         <summary>
           <strong
             ><a href="https://github.com/jon-edward/box2d.nim"
@@ -73,14 +73,17 @@
         <p>
           This binding solved a personal need to create a physics-based game in
           Nim and by creating complete
-          <a href="https://jon.is-a.dev/box2d.nim/">documentation</a> and
-          <a href="https://github.com/jon-edward/box2d.nim/tree/main/tests"
-            >testing</a
+          <strong
+            ><a href="https://jon.is-a.dev/box2d.nim/">documentation</a> and
+            <a href="https://github.com/jon-edward/box2d.nim/tree/main/tests"
+              >testing</a
+            ></strong
           >
           I was able to effectively solve this problem for others.
         </p>
+        <img class="projects-img" src="/src/assets/boxes_frame_white.png" />
       </details>
-      <details>
+      <details open="">
         <summary>
           <strong
             ><a href="https://github.com/jon-edward/wiki_dump"
@@ -99,12 +102,29 @@
           servers and is prone to failure.
         </p>
         <p>
-          To solve this issue, I created an API that accesses the index of the
-          site and wraps common query operations around idiomatic Python
-          classes.
+          To solve this issue, I created an <strong>API</strong> that accesses
+          the index of the site and wraps common query operations around
+          idiomatic Python classes.
         </p>
+        <p>Below is a typical usage of the library.</p>
+        <pre><code>
+from wiki_data_dump import WikiDump, File
+import re
+from typing import List
+
+wiki = WikiDump()
+
+xml_stubs_dump_job = wiki["enwiki", "xmlstubsdump"]
+
+stub_history_files: List[File] = xml_stubs_dump_job.get_files(
+    re.compile(r"stub-meta-history[0-9]+\.xml\.gz$")
+)
+
+for file in stub_history_files:
+    wiki.download(file).join()
+        </code></pre>
       </details>
-      <details>
+      <details open="">
         <summary>
           <strong
             ><a href="https://github.com/jon-edward/web_python"
@@ -126,8 +146,9 @@
         <p>
           Pyodide is a WASM-based Python interpreter and when provided a native
           file system directory handle as a virtual file system mount point you
-          can use the interpreter very much like a native Python installation:
-          file reads/writes are updated in real time.
+          can use the interpreter very much like a
+          <i>native Python installation</i>: file reads/writes are updated in
+          real time.
         </p>
         <p>
           This is a huge quality improvement over typical online Python
@@ -135,9 +156,9 @@
           (again, entirely in the browser) this nears even closer to a native
           Python installation.
         </p>
+        <img class="projects-img" src="/src/assets/web_python.png" />
       </details>
-
-      <details>
+      <details open="">
         <summary>
           <strong
             ><a href="https://github.com/jon-edward/wiki-categories"
@@ -150,8 +171,9 @@
           For another project, I needed a way to navigate the Wikipedia category
           hierarchy quickly, and without the Wikipedia API. Originally using the
           above <code>wiki_dump</code> project, I constructed a pipeline to
-          automatically extract category data from the Wikimedia assets,
-          transform it into a graph structure, and upload it to GitHub Pages.
+          automatically <strong>extract</strong> category data from the
+          Wikimedia assets, <strong>transform</strong> it into a graph
+          structure, and upload it to GitHub Pages.
         </p>
         <p>
           There were multiple limitations that needed to be properly handled:
@@ -168,7 +190,9 @@
       </details>
     </section>
     <section id="links">
-      <p>Contact me for my resume. <code>:)</code></p>
+      <p style="padding: 15px 0">
+        <strong>Contact me for my resume. <code>:)</code></strong>
+      </p>
       <p>
         <a href="https://github.com/jon-edward" target="_blank"
           ><img
@@ -219,6 +243,23 @@
         /></a>
       </p>
     </section>
+    <div style="height: 100px"></div>
     <script type="module" src="/src/main.ts"></script>
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/atom-one-light.min.css"
+      media="screen"
+    />
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/a11y-dark.min.css"
+      media="screen and (prefers-color-scheme: dark)"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+
+    <script>
+      hljs.highlightAll();
+    </script>
   </body>
 </html>
