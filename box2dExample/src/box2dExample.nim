@@ -153,6 +153,8 @@ proc main() =
         
         b2World_Draw(worldId, debugDraw.addr)
 
+        drawText("click and drag to spawn boxes, press 'r' to clear screen", 10, 10, 20, DarkGray);
+
         endDrawing()
     
     windowMain(initialWidth, initialHeight, "boxes example", mainLoop, postInit)
