@@ -62,6 +62,4 @@ box2dExample.onclick = async () => {
   // This is removed on WASM runtime initialization.
 
   setInnerHTML(box2dExample, shellHtml);
-
-  console.log(box2dExample.clientHeight);
 };
