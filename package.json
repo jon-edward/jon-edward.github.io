@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "nimBuild": "nim c -d:emscripten -d:release ./box2dExample/src/box2dExample",
+    "nimBuild": "(cd box2dExample && nimble install --depsOnly) && nim c -d:emscripten -d:release ./box2dExample/src/box2dExample",
     "dev": "npm run nimBuild && vite",
     "build": "npm run nimBuild && tsc && vite build",
     "preview": "vite preview"
