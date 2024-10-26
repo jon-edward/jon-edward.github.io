@@ -4,12 +4,18 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
+    "nimBuild": "nim c -d:emscripten -d:release ./box2dExample/src/box2dExample",
+    "dev": "npm run nimBuild && vite",
+    "build": "npm run nimBuild && tsc && vite build",
     "preview": "vite preview"
   },
   "devDependencies": {
+    "@types/node": "^22.7.9",
     "typescript": "^5.5.3",
-    "vite": "^5.4.8"
+    "vite": "^5.4.8",
+    "vite-plugin-cross-origin-isolation": "^0.1.6",
+    "vite-plugin-html-inject": "^1.1.2",
+    "vite-plugin-mkcert": "^1.17.6",
+    "vite-plugin-wasm": "^3.3.0"
   }
 }
