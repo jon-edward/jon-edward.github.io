@@ -27,7 +27,7 @@ physicsShapeDef.restitution = restitution
 
 
 ## Initialize physics with a gravity vector
-proc initPhysics(): b2WorldId = 
+proc initPhysics(): b2WorldId =
     var worldDef = b2DefaultWorldDef()
     worldDef.gravity = b2Vec2(x: 0.0f, y: 10.0f)
     b2CreateWorld(worldDef.addr)
@@ -44,14 +44,14 @@ const objectsPerFrameHeld = 4
 
 
 ## Make box body
-proc makeBox(worldId: b2WorldId, position: b2Vec2): b2BodyId = 
+proc makeBox(worldId: b2WorldId, position: b2Vec2): b2BodyId =
     var bodyDef = b2DefaultBodyDef()
 
     bodyDef.bodyType = b2_dynamicBody
     bodyDef.position = position
-    
+
     let bodyId = b2CreateBody(worldId, bodyDef.addr)
-    let box = b2MakeBox(0.08f, 0.08f)
+    let box = b2MakeBox(0.1f, 0.1f)
 
     discard b2CreatePolygonShape(bodyId, physicsShapeDef.addr, box.addr)
     bodyId
@@ -63,18 +63,18 @@ boxStack.clear(b2_nullBodyId)
 
 
 ## Destroy a box in the stack with null body check
-proc destroyBoxSafe(bodyId: b2BodyId) = 
+proc destroyBoxSafe(bodyId: b2BodyId) =
     if bodyId != b2_nullBodyId:
         b2DestroyBody(bodyId)
 
 
 ## Destroy a box in the stack, no null body check
-proc destroyBoxUnsafe(bodyId: b2BodyId) = 
+proc destroyBoxUnsafe(bodyId: b2BodyId) =
     b2DestroyBody(bodyId)
 
 
 ## Create circle under mouse position, and delete old circles if stack is full.
-proc mouseDown(worldId: b2WorldId, mousePosB2: b2Vec2) = 
+proc mouseDown(worldId: b2WorldId, mousePosB2: b2Vec2) =
     for _ in 0..<objectsPerFrameHeld:
         boxStack.insert(worldId.makeBox(mousePosB2), destroyBoxUnsafe)
 
@@ -85,7 +85,8 @@ var boundShapeDown: b2ShapeId
 
 
 ## Create world bounds
-proc makeBounds*(worldId: b2WorldId, density: float32, friction: float32, restitution: float32) = 
+proc makeBounds*(worldId: b2WorldId, density: float32, friction: float32,
+        restitution: float32) =
     var bodyDef = b2DefaultBodyDef()
 
     currentWidth = getScreenWidth().float32.toB2
@@ -96,18 +97,19 @@ proc makeBounds*(worldId: b2WorldId, density: float32, friction: float32, restit
     segmentDown.point2 = b2Vec2(x: currentWidth, y: currentHeight)
 
     let boundBodyDown = b2CreateBody(worldId, bodyDef.addr)
-    boundShapeDown = b2CreateSegmentShape(boundBodyDown, physicsShapeDef.addr, segmentDown.addr)
+    boundShapeDown = b2CreateSegmentShape(boundBodyDown, physicsShapeDef.addr,
+            segmentDown.addr)
 
 
-## Update world bounds to current window size. 
-## 
+## Update world bounds to current window size.
+##
 ## This is not graceful, and will throw bodies outside world bounds
-proc setBounds*(worldId: b2WorldId) = 
+proc setBounds*(worldId: b2WorldId) =
     let width = getScreenWidth().float32.toB2
     let height = getScreenHeight().float32.toB2
 
     # If no window size change has been made, return early.
-    # All objects on the ground will be kept awake if 
+    # All objects on the ground will be kept awake if
     # shapes are updated every frame.
     if currentHeight == height and currentWidth == width:
         return
@@ -122,17 +124,17 @@ proc setBounds*(worldId: b2WorldId) =
 
 
 ## Top-level function that initializes window and performs game loops
-proc main() = 
-    
-    # Prevents sudden physics simulation jumps (usually occurs when the window is minimized) 
+proc main() =
+
+    # Prevents sudden physics simulation jumps (usually occurs when the window is minimized)
     const maxDeltaPerFrame: float32 = 1/30
 
     # Called after window initialization but before first draw
-    proc postInit() {.cdecl.} = 
+    proc postInit() {.cdecl.} =
         worldId.makeBounds(density, friction, restitution)
 
     # Performs physics step and window update
-    proc mainLoop() {.cdecl.} = 
+    proc mainLoop() {.cdecl.} =
 
         worldId.setBounds()
 
@@ -144,20 +146,38 @@ proc main() =
         clearBackground(Color(r: 30, g: 30, b: 30, a: 255))
 
         let mousePosB2 = getMousePosition().toB2
-        
+
         if isMouseButtonDown(MouseButton.Left):
             mouseDown(worldId, mousePosB2)
-        
+
         if isKeyPressed(R):
             boxStack.clear(b2_nullBodyId, destroyBoxSafe)
-        
+
         b2World_Draw(worldId, debugDraw.addr)
 
-        drawText("click and drag to spawn boxes, press 'r' to clear screen", 10, 10, 20, DarkGray);
+        # If no active bodies, show helpful message
+        if boxStack.length == 0:
+            let font = getFontDefault()
+            let fontSize = 50.0
+            let fontSpacing = 5.0
+            let startMessage = "click and drag to spawn boxes"
+            let startMessageDims = measureText(font, startMessage, fontSize, fontSpacing)
+
+            drawText(
+                font,
+                startMessage,
+                Vector2(
+                    x: (initialWidth.float32 - startMessageDims.x) / 2,
+                    y: (initialHeight.float32 - startMessageDims.y) / 2
+                ),
+                fontSize,
+                fontSpacing,
+                LightGray
+            )
 
         endDrawing()
-    
-    windowMain(initialWidth, initialHeight, "boxes example", mainLoop, postInit)
+
+    windowMain(initialWidth, initialHeight, "Jon is a developer", mainLoop, postInit)
 
 
 if isMainModule:
