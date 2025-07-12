@@ -11,5 +11,5 @@ bin           = @["box2dExample"]
 # Dependencies
 
 requires "nim >= 2.0.8"
-requires "box2d >= 0.1.1"
+requires "box2d >= 0.1.3"
 requires "naylib >= 24.41"
