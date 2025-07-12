@@ -1,7 +1,5 @@
 ## Implements useful debugging callbacks.
 
-import math
-
 import box2d
 import raylib
 
@@ -28,15 +26,15 @@ proc noopDebugDraw*(): b2DebugDraw =
     var debugDraw: b2DebugDraw
 
     {.push cdecl.}
-    debugDraw.DrawCircle = proc (center: b2Vec2, radius: cfloat, color: b2HexColor, context: pointer) = discard
-    debugDraw.DrawPoint = proc (p: b2Vec2, size: cfloat, color: b2HexColor, context: pointer) = discard
-    debugDraw.DrawPolygon = proc (vertices: ptr b2Vec2, vertexCount: cint, color: b2HexColor, context: pointer) = discard
-    debugDraw.DrawSegment = proc (p1: b2Vec2, p2: b2Vec2, color: b2HexColor, context: pointer) = discard
-    debugDraw.DrawSolidCapsule = proc (p1: b2Vec2, p2: b2Vec2, radius: cfloat, color: b2HexColor, context: pointer) = discard
-    debugDraw.DrawSolidCircle = proc (transform: b2Transform, radius: cfloat, color: b2HexColor, context: pointer) = discard
-    debugDraw.DrawSolidPolygon = proc (transform: b2Transform, vertices: ptr b2Vec2, vertexCount: cint, radius: cfloat, color: b2HexColor, context: pointer) = discard
-    debugDraw.DrawTransform = proc (transform: b2Transform, context: pointer) = discard
-    debugDraw.DrawString = proc (p: b2Vec2, s: cstring, context: pointer) = discard
+    debugDraw.DrawCircleFcn = proc (center: b2Vec2, radius: cfloat, color: b2HexColor, context: pointer) = discard
+    debugDraw.DrawPointFcn = proc (p: b2Vec2, size: cfloat, color: b2HexColor, context: pointer) = discard
+    debugDraw.DrawPolygonFcn = proc (vertices: ptr b2Vec2, vertexCount: cint, color: b2HexColor, context: pointer) = discard
+    debugDraw.DrawSegmentFcn = proc (p1: b2Vec2, p2: b2Vec2, color: b2HexColor, context: pointer) = discard
+    debugDraw.DrawSolidCapsuleFcn = proc (p1: b2Vec2, p2: b2Vec2, radius: cfloat, color: b2HexColor, context: pointer) = discard
+    debugDraw.DrawSolidCircleFcn = proc (transform: b2Transform, radius: cfloat, color: b2HexColor, context: pointer) = discard
+    debugDraw.DrawSolidPolygonFcn = proc (transform: b2Transform, vertices: ptr b2Vec2, vertexCount: cint, radius: cfloat, color: b2HexColor, context: pointer) = discard
+    debugDraw.DrawTransformFcn = proc (transform: b2Transform, context: pointer) = discard
+    debugDraw.DrawStringFcn = proc (p: b2Vec2, s: cstring, color: b2HexColor, context: pointer) = discard
     {.pop.}
 
     debugDraw

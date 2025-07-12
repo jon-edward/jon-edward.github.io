@@ -22,8 +22,8 @@ const restitution = 0.1f
 
 var physicsShapeDef = b2DefaultShapeDef()
 physicsShapeDef.density = density
-physicsShapeDef.friction = friction
-physicsShapeDef.restitution = restitution
+physicsShapeDef.material.friction = friction
+physicsShapeDef.material.restitution = restitution
 
 
 ## Initialize physics with a gravity vector
@@ -35,7 +35,7 @@ proc initPhysics(): b2WorldId =
 
 ## Create a debugDraw object with drawing callbacks
 var debugDraw: b2DebugDraw = noopDebugDraw()
-debugDraw.DrawSolidPolygon = drawSolidPolygon
+debugDraw.DrawSolidPolygonFcn = drawSolidPolygon
 debugDraw.drawShapes = true
 
 let worldId = initPhysics()
